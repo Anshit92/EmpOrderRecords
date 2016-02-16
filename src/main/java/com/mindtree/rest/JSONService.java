@@ -61,7 +61,7 @@ ResultSet rs,rs2;
 			{		
 			if(names.equals(rs2.getString(1)))
 			{
-				json.put("order_name",rs2.getString(1));
+				json.put("name",rs2.getString(1));
 				json.put("description",rs2.getString(2));
 				System.out.println(json);
 				return Response.status(201).entity(json).build();

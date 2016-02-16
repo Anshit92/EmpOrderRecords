@@ -6,19 +6,27 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>Welcomeses</title>
-	</head> 
-	<body>
-	<h2>insert records in tables</h2>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert</title>
+</head>
+<body>
+<h2>Insert records into Tables</h2>
 	<form action="tables">
-	<input type="submit" value="Insert Records">
-	</form> <br>
-		<h2>Retrieve records from tables</h2>
+	<input type="submit" value="Insert the Records">
+	</form>
+	<hr>
+	
+	
+<h2>Retrieve records from tables</h2>
 	<form action="querythem">
 	<input type="submit" value="Retrieve the Records">
-	</form> 
+	</form>
+	<hr>
 	
-	</body>
+<!-- 	<h2>Run flyway : DB versioning</h2>
+	<form action="flyways">
+	<input type="submit" value="Migrate DB">
+	</form> -->
+</body>
 </html>

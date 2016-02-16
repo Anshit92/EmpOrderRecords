@@ -58,8 +58,8 @@ public class RestControllers {
 	{
 		String msg=null;
 		Order order=new Order();
-		String ordername=request.getParameter("orderName");
-		String description=request.getParameter("Desc");
+		String ordername=request.getParameter("name");
+		String description=request.getParameter("description");
 		order.setOrderName(ordername);
 		order.setDescription(description);
 		try {
@@ -67,7 +67,7 @@ public class RestControllers {
 			String json = g.toJson(order);
 			System.out.println("Generating Response from Server....");
 			WebResource webResource = client.resource("http://localhost:8080/EmpOrderRecords/rest/post/order");
-			ClientResponse clientResponse = webResource.type("application/json").post(ClientResponse.class, json);
+			ClientResponse clientResponse = webResource.type("application/json").post(ClientResponse.class, json.toString());
 			if (clientResponse.getStatus() != 201) {
 				msg="Order record could not be inserted";
 				throw new RuntimeException("Failed : HTTP error code : " + clientResponse.getStatus());
