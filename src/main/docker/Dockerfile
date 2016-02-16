@@ -1,4 +1,5 @@
-FROM preetick/jvcatenv:v1
+#FROM preetick/jvcatenv:v1
+FROM ashishchaturvedi/tomcatjava
 
 MAINTAINER M1032338
 
