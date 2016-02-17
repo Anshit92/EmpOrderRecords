@@ -1,6 +1,5 @@
 package com.mindtree.rest;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,7 +21,6 @@ import org.codehaus.jettison.json.JSONObject;
 import com.mindtree.entity.Employee;
 import com.mindtree.entity.Order;
 import com.mindtree.util.ConnectionManager;
-
 
 
 @Path("/")
