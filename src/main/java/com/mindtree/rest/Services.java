@@ -16,6 +16,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.log4j.Logger;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
@@ -26,6 +27,7 @@ import com.mindtree.util.ConnectionManager;
 
 @Path("/")
 public class Services {
+	private static final Logger logger = Logger.getLogger(Services.class);
 Connection con;
 PreparedStatement pr;
 Statement stmt;
@@ -49,7 +51,7 @@ ResultSet rs,rs2;
             jsonObject.put(rsmd.getColumnName(i), columnValue);
         }
     }} catch (SQLException e) {
-		e.printStackTrace();
+		logger.error("SQL Exception");
 	}
 		return Response.status(201).entity(jsonObject).build();
 	}

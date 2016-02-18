@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,6 +21,8 @@ import com.sun.jersey.api.client.WebResource;
 public class RestControllers {
 	Client client = Client.create();
 	Gson gson = new Gson();
+	private static final Logger logger = Logger.getLogger(RestControllers.class);
+	
 	@RequestMapping("/empinsert")
 	public ModelAndView getRequestForEmployee(HttpServletRequest request,HttpServletResponse response)
 	{
@@ -43,7 +46,7 @@ public class RestControllers {
 		}
 		msg="Employee record inserted successfully";
 	} catch (Exception e) {
-		e.printStackTrace();
+		logger.error("Error inserting records");
 	}
 	ModelAndView mav=new ModelAndView();
 	mav.addObject("msg",msg);
@@ -74,7 +77,7 @@ public class RestControllers {
 			msg="Order record inserted sucessfully";
 		
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Order could not be inserted");
 		}
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("msg",msg);
@@ -97,7 +100,7 @@ public class RestControllers {
 			String out=clientResponse.getEntity(String.class);
 			msg=out;
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Exception man");
 		}
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("msg",msg);
