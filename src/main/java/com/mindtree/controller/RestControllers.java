@@ -6,8 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -17,13 +18,14 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
-@Controller
+@RestController
+/*@RequestMapping("/CallApi")*/
 public class RestControllers {
 	Client client = Client.create();
 	Gson gson = new Gson();
 	private static final Logger logger = Logger.getLogger(RestControllers.class);
 	
-	@RequestMapping("/empinsert")
+	@RequestMapping(value="/empinsert",method = RequestMethod.GET)
 	public ModelAndView getRequestForEmployee(HttpServletRequest request,HttpServletResponse response)
 	{
 	String msg=null;
@@ -55,7 +57,7 @@ public class RestControllers {
 	
 	}
 
-	@RequestMapping("/orderinsert")
+	@RequestMapping(value="/orderinsert",method = RequestMethod.GET)
 	public ModelAndView getRequestForOrder(HttpServletRequest request,HttpServletResponse response)
 	{
 		String msg=null;
@@ -84,7 +86,7 @@ public class RestControllers {
 		mav.setViewName("welcome");
 		return mav;
 	}
-	@RequestMapping("/display")
+	@RequestMapping(value="/display",method = RequestMethod.GET)
 	public ModelAndView searchRequest(HttpServletRequest request,HttpServletResponse response)
 	{
 		String searchTable=request.getParameter("table");
