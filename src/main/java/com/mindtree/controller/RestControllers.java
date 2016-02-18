@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,20 +20,20 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 @RestController
-/*@RequestMapping("/CallApi")*/
+@RequestMapping("/CallApi")
 public class RestControllers {
 	Client client = Client.create();
 	Gson gson = new Gson();
 	private static final Logger logger = Logger.getLogger(RestControllers.class);
 	
 	@RequestMapping(value="/empinsert",method = RequestMethod.GET)
-	public ModelAndView getRequestForEmployee(HttpServletRequest request,HttpServletResponse response)
+	public ModelAndView getRequestForEmployee(HttpServletRequest request,HttpServletResponse response,@RequestParam("name") String name,@RequestParam("age") String age,@RequestParam("gender") String gender)
 	{
 	String msg=null;
 	Employee employee=new Employee();	
-	String empname=request.getParameter("name");
-	String empAge=request.getParameter("age");
-	String empGender=request.getParameter("gender");
+	String empname=name;
+	String empAge=age;
+	String empGender=gender;
 	employee.setName(empname);
 	employee.setAge(empAge);
 	employee.setGender(empGender);
@@ -58,12 +59,12 @@ public class RestControllers {
 	}
 
 	@RequestMapping(value="/orderinsert",method = RequestMethod.GET)
-	public ModelAndView getRequestForOrder(HttpServletRequest request,HttpServletResponse response)
+	public ModelAndView getRequestForOrder(HttpServletRequest request,HttpServletResponse response,@RequestParam("name") String name,@RequestParam("description") String desc)
 	{
 		String msg=null;
 		Order order=new Order();
-		String ordername=request.getParameter("name");
-		String description=request.getParameter("description");
+		String ordername=name;
+		String description=desc;
 		order.setOrderName(ordername);
 		order.setDescription(description);
 		try {
@@ -87,10 +88,10 @@ public class RestControllers {
 		return mav;
 	}
 	@RequestMapping(value="/display",method = RequestMethod.GET)
-	public ModelAndView searchRequest(HttpServletRequest request,HttpServletResponse response)
+	public ModelAndView searchRequest(HttpServletRequest request,HttpServletResponse response,@RequestParam("name") String name,@RequestParam("table") String table)
 	{
-		String searchTable=request.getParameter("table");
-		String queryname=request.getParameter("name");
+		String searchTable=table;
+		String queryname=name;
 		String msg=null;
 		try {
 			String names = URLEncoder.encode (queryname,"UTF-8").replace("+", "%20");

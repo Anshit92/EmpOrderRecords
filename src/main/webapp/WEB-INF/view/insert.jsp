@@ -8,7 +8,7 @@
 </head>
 <body>
 <h2>Insert records into Employee Table</h2>
-	<form action="empinsert">
+	<form action="CallApi/empinsert">
 	<!-- <select name="table">
 	<option value="employee">employee</option>
 	<option value="orders">order</option>
@@ -20,7 +20,7 @@
 	</form>
 	<hr>
 	<h2>Insert records into Order table</h2>
-	<form action="orderinsert">
+	<form action="CallApi/orderinsert">
 		<p>Enter the name : <input type="text" name="name"> <br></p>
 		<p>Enter the description :<textarea rows="10" cols="60" name="description"></textarea></p>
 		<input type="submit" value="Insert">
