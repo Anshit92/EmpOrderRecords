@@ -3,6 +3,7 @@ package com.mindtree.rest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -24,49 +25,33 @@ import com.mindtree.util.ConnectionManager;
 
 
 @Path("/")
-public class JSONService {
+public class Services {
 Connection con;
 PreparedStatement pr;
-Statement st;
+Statement stmt;
 ResultSet rs,rs2;
 	@GET
 	@Path("/{table}/{names}")
 	public Response getTrackInJSON(@PathParam("table")String table,@PathParam("names")String names) throws SQLException, JSONException {
-	JSONObject json= new JSONObject();
-	/*new DbVersioning().callflyway();*/
+	JSONObject jsonObject = new JSONObject();
+	try {
 	con=ConnectionManager.getConnection();
-	st=con.createStatement();
-		if(table.equals("employee"))
-		{
-			rs=st.executeQuery("select * from employee where name='"+names+"';");
-			while(rs.next())
-			{		
-			if(names.equals(rs.getString(1)))
-			{
-				json.put("name",rs.getString(1));
-				json.put("age",rs.getString(2));
-				json.put("gender",rs.getString(3));
-				System.out.println(json);
-				return Response.status(201).entity(json).build();
-			}	
-				
-			}
-		}
-		if(table.equals("orders"))
-		{
-			rs2=st.executeQuery("select * from orders where name='"+names+"';");
-			while(rs2.next())
-			{		
-			if(names.equals(rs2.getString(1)))
-			{
-				json.put("name",rs2.getString(1));
-				json.put("description",rs2.getString(2));
-				System.out.println(json);
-				return Response.status(201).entity(json).build();
-			}	
-		}
-		}
-		return Response.status(201).entity(json).build();
+	stmt=con.createStatement();
+	String query = "select * from "+table+" where name='"+names+"'";
+    ResultSet rs =  stmt.executeQuery(query);
+    ResultSetMetaData rsmd = rs.getMetaData();
+    int columnsNumber = rsmd.getColumnCount();
+    
+    while (rs.next()) {
+        for (int i = 1;i <= columnsNumber; i++) {
+            String columnValue = rs.getString(i);
+            System.out.println(columnValue);
+            jsonObject.put(rsmd.getColumnName(i), columnValue);
+        }
+    }} catch (SQLException e) {
+		e.printStackTrace();
+	}
+		return Response.status(201).entity(jsonObject).build();
 	}
 	
 
@@ -75,9 +60,6 @@ ResultSet rs,rs2;
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createTrackInJSON(Employee employee) throws SQLException {
-		System.out.println("Enabling Database integration...");
-		/*new DbVersioning().callflyway();*/
-		System.out.println("Database Integration completed!!!");
 		String result = "Employee with name "+employee.getName()+" saved";
 		con=ConnectionManager.getConnection();
 		pr=con.prepareStatement("insert into employee values(?,?,?);");
@@ -93,9 +75,6 @@ ResultSet rs,rs2;
 	@Consumes(MediaType.APPLICATION_JSON)
 
 	public Response createTrackInJSON(Order order) throws SQLException {
-		System.out.println("Enabling Database integration...");
-		/*new DbVersioning().callflyway();*/
-		System.out.println("Database Integration completed!!!");
 		String result = "Order with name "+order.getOrderName()+" saved";
 		con=ConnectionManager.getConnection();
 		pr=con.prepareStatement("insert into orders values(?,?);");

@@ -1,4 +1,4 @@
-package com.mindtree.client;
+package com.mindtree.controller;
 
 import java.net.URLEncoder;
 
@@ -28,14 +28,13 @@ public class RestControllers {
 	String empname=request.getParameter("name");
 	String empAge=request.getParameter("age");
 	String empGender=request.getParameter("gender");
-	System.out.println(empname);
 	employee.setName(empname);
 	employee.setAge(empAge);
 	employee.setGender(empGender);
 	try {
 		Gson g = new Gson();
 		String json = g.toJson(employee);
-		System.out.println("Generating Response from Server....");
+		System.out.println("Server running....");
 		WebResource webResource = client.resource("http://localhost:8080/EmpOrderRecords/rest/post/employee");
 		ClientResponse clientResponse = webResource.type("application/json").post(ClientResponse.class, json.toString());
 		if (clientResponse.getStatus() != 201) {
