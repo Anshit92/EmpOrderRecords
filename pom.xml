@@ -280,6 +280,7 @@
 		<!-- </plugins>
 	</build> -->
 	<build>
+	<finalName>EmpOrderRecords</finalName>
 	<plugins>
 	<plugin>
                 <groupId>org.flywaydb</groupId>
