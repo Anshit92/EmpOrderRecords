@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.mindtree.records</groupId>
 	<artifactId>EmpOrderRecords</artifactId>
-	<version>SNAPSHOT-1</version>
+	<version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   
     <pluginRepositories>
