@@ -22,6 +22,7 @@ import com.sun.jersey.api.client.WebResource;
 @RestController
 @RequestMapping("/CallApi")
 public class RestControllers {
+	public static String jsp="welcome";
 	Client client = Client.create();
 	Gson gson = new Gson();
 	private static final Logger logger = Logger.getLogger(RestControllers.class);
@@ -41,7 +42,7 @@ public class RestControllers {
 		Gson g = new Gson();
 		String json = g.toJson(employee);
 		System.out.println("Server running....");
-		WebResource webResource = client.resource("http://localhost:8080/EmpOrderRecords/rest/post/employee");
+		WebResource webResource = client.resource("http://13.76.131.131:8083/EmpOrderRecords/rest/post/employee");
 		ClientResponse clientResponse = webResource.type("application/json").post(ClientResponse.class, json.toString());
 		if (clientResponse.getStatus() != 201) {
 			msg="Employee record could not be inserted";
@@ -53,7 +54,7 @@ public class RestControllers {
 	}
 	ModelAndView mav=new ModelAndView();
 	mav.addObject("msg",msg);
-	mav.setViewName("welcome");
+	mav.setViewName(jsp);
 	return mav;
 	
 	}
@@ -71,7 +72,7 @@ public class RestControllers {
 			Gson g = new Gson();
 			String json = g.toJson(order);
 			System.out.println("Generating Response from Server....");
-			WebResource webResource = client.resource("http://localhost:8080/EmpOrderRecords/rest/post/order");
+			WebResource webResource = client.resource("http://13.76.131.131:8083/EmpOrderRecords/rest/post/order");
 			ClientResponse clientResponse = webResource.type("application/json").post(ClientResponse.class, json.toString());
 			if (clientResponse.getStatus() != 201) {
 				msg="Order record could not be inserted";
@@ -84,9 +85,10 @@ public class RestControllers {
 		}
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("msg",msg);
-		mav.setViewName("welcome");
+		mav.setViewName(jsp);
 		return mav;
 	}
+	
 	@RequestMapping(value="/display",method = RequestMethod.GET)
 	public ModelAndView searchRequest(HttpServletRequest request,HttpServletResponse response,@RequestParam("name") String name,@RequestParam("table") String table)
 	{
@@ -95,7 +97,7 @@ public class RestControllers {
 		String msg=null;
 		try {
 			String names = URLEncoder.encode (queryname,"UTF-8").replace("+", "%20");
-			WebResource webResource = client.resource("http://localhost:8080/EmpOrderRecords/rest/"+searchTable+"/"+names);
+			WebResource webResource = client.resource("http://13.76.131.131:8083/EmpOrderRecords/rest/"+searchTable+"/"+names);
 			ClientResponse clientResponse = webResource.accept("application/json").get(ClientResponse.class);
 			if (clientResponse.getStatus() != 201) {
 				throw new RuntimeException("Failed : HTTP error code : "+ clientResponse.getStatus());
@@ -107,7 +109,7 @@ public class RestControllers {
 		}
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("msg",msg);
-		mav.setViewName("welcome");
+		mav.setViewName(jsp);
 		return mav;
 		
 	}
