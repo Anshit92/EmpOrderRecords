@@ -18,21 +18,20 @@ public class ConnectionManager {
 	private static Connection con;
 
 	public static Connection getConnection() {
-		Properties prop = new Properties();
+		/*Properties prop = new Properties();
 		InputStream input = null;
-		/*input = ConnectionManager.class.getClassLoader().getResourceAsStream("config.properties");
+		input = ConnectionManager.class.getClassLoader().getResourceAsStream("config.properties");
 		try {
 			prop.load(input);
 		} catch (IOException e) {
 			System.out.println("IO Error");
-		}
-		String username = prop.getProperty("username");   
-		String password = prop.getProperty("password");
-		System.out.println("UserName: "+username+"Password: "+password);*/
+		}*/
+		String username ="demo";   
+		String password = "Welcome123";
 		try {
 			Class.forName(driverName);
 			try {
-				con = DriverManager.getConnection(url, "demo", "Welcome123");
+				con = DriverManager.getConnection(url, username, password);
 			} catch (SQLException ex) {
 				logger.error("Failed to create the database connection.");
 			}
