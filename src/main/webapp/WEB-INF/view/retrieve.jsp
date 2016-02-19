@@ -7,7 +7,7 @@
 <title>Search Record</title>
 </head>
 <body>
-<form action="display">
+<form action="CallApi/display">
 	<p>Select the table: <select name="table">
 	<option value="employee">employee</option>
 	<option value="orders">order</option>
