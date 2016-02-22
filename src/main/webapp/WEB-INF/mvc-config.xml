@@ -23,4 +23,5 @@
 	<bean id="documentationConfig"
 		class="com.mangofactory.swagger.configuration.SpringSwaggerConfig">
 	</bean>
+	<bean name="dbVersion" init-method="startMigrating" class="com.mindtree.util.DbVersioning" lazy-init="false"></bean>
 </beans>

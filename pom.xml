@@ -296,6 +296,30 @@
 	<finalName>EmpOrderRecords</finalName>
 	<plugins>
 	<plugin>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-maven-plugin</artifactId>
+			<version>3.2.1</version>
+			<configuration>
+				<driver>com.mysql.jdbc.Driver</driver>
+				<url>jdbc:mysql://13.76.142.98:3306/employee_order_db</url>
+				<user>demo</user>
+				<password>Welcome123</password>
+				<table>schema_version</table>
+				<!-- <locations>
+					<location>src/main/resources/db/migration/V4__Create_Employee.sql</location>
+					<location>src/main/resources/db/migration/V5__Insert_Orders.sql</location>
+				</locations> -->
+				<!-- <validateOnMigrate>false</validateOnMigrate> -->
+			</configuration>
+			<dependencies>
+				<dependency>
+					<groupId>com.h2database</groupId>
+					<artifactId>h2</artifactId>
+					<version>1.3.170</version>
+				</dependency>
+			</dependencies>
+		</plugin>
+	<!-- <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>3.2.1</version>
@@ -310,7 +334,7 @@
                         <version>1.3.170</version>
                     </dependency>
                 </dependencies>
-            </plugin>
+            </plugin> -->
              <!-- <plugin>
         <groupId>com.smartbear.soapui</groupId>
         <artifactId>soapui-maven-plugin</artifactId>
